@@ -1,10 +1,17 @@
 <template>
     <div class="movie-details" v-if="movie">
-        <h1>{{ movie.name }}</h1>
-        <img :src="movie.image" alt="Movie Poster" class="movie-poster">
+        <div class="header-group">
+            <h1 class="movie-name">{{ movie.name }}</h1>
+            <div class="second-block">
+                <img :src="movie.image" alt="Movie Poster" class="movie-poster">
+                <movie-sessions :movie-id="movie.id"/>
+            </div>
+        </div>
         <div class="additional-info" v-html="movie.additional"></div>
-        <h2>Description:</h2>
-        <p class="description" v-html="movie.description"></p>
+        <div class="description-group">
+            <h2 class="description-title">Description:</h2>
+            <p class="description" v-html="movie.description"></p>
+        </div>
     </div>
     <div v-else>
         <p>Loading...</p>
@@ -12,9 +19,13 @@
 </template>
 
 <script>
-import { fetchMovies } from '@/services/cinema-api';
+import {fetchMovies} from '@/services/cinema-api';
+import MovieSessions from "@/components/MovieSessions";
 
 export default {
+    components: {
+        MovieSessions,
+    },
     data() {
         return {
             movie: null
@@ -25,7 +36,6 @@ export default {
             const movieId = this.$route.params.id;
             const response = await fetchMovies({ movie_id: movieId });
             this.movie = response.data[0];
-            console.log(this.movie.description)
         } catch (error) {
             console.error('Error fetching movie details:', error);
         }
@@ -42,9 +52,25 @@ export default {
     padding: 20px;
 }
 
+.header-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.movie-name {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.second-block {
+    display: flex;
+}
+
 .movie-poster {
     width: fit-content;
-    max-width: 240px;
+    max-width: 233px;
+    max-height: 344px;
     border-radius: 8px;
 }
 
@@ -56,8 +82,27 @@ export default {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.description-group {
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.description-title {
+    margin-bottom: 10px;
+}
+
 .description {
+
     line-height: 1.6;
     color: #333;
+}
+
+@media (max-width: 500px) {
+    .second-block {
+        flex-direction: column;
+        align-items: center;
+    }
 }
 </style>

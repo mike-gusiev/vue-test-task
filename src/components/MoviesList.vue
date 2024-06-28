@@ -1,21 +1,27 @@
 <template>
     <div class="movies-container">
         <form @submit.prevent="searchMovies" class="search-form">
-            <label for="movieName">Movie Name:</label>
-            <input type="text" id="movieName" v-model="searchParams.name" class="form-input">
+            <div class="form-first-block">
+                <label for="movieName">Movie Name:</label>
+                <input type="text" id="movieName" v-model="searchParams.name" class="form-input">
+            </div>
 
-            <label for="genres">Genres:</label>
-            <select id="genres" v-model="searchParams.genres" class="form-input">
-                <option value="">All Genres</option>
-                <option value="0">Action</option>
-                <option value="1">Adventures</option>
-                <option value="2">Comedy</option>
-                <option value="3">Drama</option>
-                <option value="4">Horror</option>
-                <option value="5">Westerns</option>
-            </select>
+            <div class="form-second-block">
+                <div>
+                    <label for="genres">Genres:</label>
+                    <select id="genres" v-model="searchParams.genres" class="form-input">
+                        <option value="">All Genres</option>
+                        <option value="0">Action</option>
+                        <option value="1">Adventures</option>
+                        <option value="2">Comedy</option>
+                        <option value="3">Drama</option>
+                        <option value="4">Horror</option>
+                        <option value="5">Westerns</option>
+                    </select>
+                </div>
 
-            <button type="submit" class="form-button">Search</button>
+                <button type="submit" class="form-button">Search</button>
+            </div>
         </form>
 
         <ul class="movies-list">
@@ -68,19 +74,33 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 0 auto;
-    padding: 20px;
+    margin: 20px;
 }
 
 .search-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
     margin-bottom: 20px;
 }
 
 .form-input {
-    margin-right: 10px;
+    max-width: 178px;
+    margin-left: 6px;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
+}
+
+.form-first-block {
+    display: flex;
+    align-items: center;
+}
+
+.form-second-block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .form-button {
@@ -90,6 +110,7 @@ export default {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    user-select: none;
 }
 
 .form-button:hover {
@@ -99,6 +120,21 @@ export default {
 .movies-list {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: center;
+}
+
+@media (min-width: 720px) {
+    .search-form {
+        flex-direction: row;
+        gap: 16px;
+    }
+
+    .form-button {
+        margin-left: 32px;
+    }
+
+    .movies-list {
+        justify-content: space-around;
+    }
 }
 </style>

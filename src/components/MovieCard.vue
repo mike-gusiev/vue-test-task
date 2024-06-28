@@ -1,7 +1,7 @@
 <template>
     <div class="movie-card" @click="goToDetails">
         <img :src="movie.image" alt="Movie Poster" class="movie-poster">
-        <h2>{{ movie.name }}</h2>
+        <h2 v-html="movie.name"></h2>
     </div>
 </template>
 
@@ -35,13 +35,8 @@ export default {
 }
 
 .movie-poster {
-    max-width: 100%;
+    max-width: 233px;
+    max-height: 344px;
     border-radius: 10px;
-}
-
-.movie-description {
-    margin-top: 15px;
-    font-size: 14px;
-    color: #555;
 }
 </style>

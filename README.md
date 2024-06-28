@@ -1,3 +1,10 @@
 # Наразі сайт виглядає так:
 
-![](src/assets/gifs/siteVue.gif)
+## MainPage:
+![](src/assets/gifs/MainPage.gif)
+
+## MovieDetails:
+![](src/assets/gifs/MovieDetails.gif)
+
+## BookedSeat:
+![](src/assets/gifs/BookedSeat.gif)

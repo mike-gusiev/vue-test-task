@@ -14,7 +14,7 @@ export async function fetchMovies(params = {}) {
 
 export async function fetchMovieSessions(movieId) {
     try {
-        const response = await axios.get(`${API_BASE_URL}/showPlaces`, { params: { movie_id: movieId } });
+        const response = await axios.get(`${API_BASE_URL}/movieShows?movie_id=${movieId}`);
         return response.data;
     } catch (error) {
         console.error('Error fetching movie sessions:', error);
@@ -30,6 +30,16 @@ export async function fetchShowPlaces(movieId, showDate, daytime) {
         return response.data;
     } catch (error) {
         console.error('Error fetching show places:', error);
+        throw error;
+    }
+}
+
+export async function bookPlace(data) {
+    try {
+        const response = await axios.post(`${API_BASE_URL}/bookPlace`, data);
+        return response.data;
+    } catch (error) {
+        console.error('Error booking place:', error);
         throw error;
     }
 }
